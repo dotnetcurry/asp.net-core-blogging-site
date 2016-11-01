@@ -1,0 +1,32 @@
+@model IEnumerable<BlogPlayground.Models.Article>
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<h3>This is what we have been writing...</h3>
+
+<div class="container">
+    <ul class="col-md-8 list-unstyled article-list">
+    @foreach (var article in Model)
+    {
+        <li>
+            @Html.Partial("_ArticleSummary", article)
+        </li>
+    }
+    </ul>
+
+    <div class="col-md-4">
+        <div class="container-fluid sidebar">
+            <div class="row">
+                <a asp-action="Create" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Write a new Article
+                </a>
+            </div>
+            <div class="row">
+                @await Component.InvokeAsync("LatestArticles", new { howMany = 2 })
+            </div>
+        </div>
+    </div>
+
+</div>
